@@ -3,233 +3,463 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
-  <title>ÉLITE 11 - Comunidad</title>
+  <title>PitchPulse / ÉLITE 11 - App de Afición, Tácticas & VAR</title>
+  
+  <!-- Tipografía & Iconos Oficiales -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,700;0,800;0,900;1,800&family=Hanken+Grotesk:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400..900;1,400..900&family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-  <style>
-    @layer base {
-      html, body {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        background-color: #0f141b;
-        color: #dee2ec;
-      }
-      body {
-        overscroll-behavior-y: none;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
-      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
-    }
-    ::-webkit-scrollbar { display: none; }
-    .tab-content { display: none; }
-    .tab-content.active { display: flex; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Configuración de Tokens y Colores de la Marca -->
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
+            "on-primary-fixed": "#002109",
+            "on-background": "#dee2ec",
+            "tertiary": "#ffb4ae",
+            "background": "#0f141b",
+            "surface-variant": "#30353d",
+            "on-primary-fixed-variant": "#005321",
+            "surface-bright": "#343941",
+            "on-tertiary-fixed-variant": "#930013",
+            "on-secondary": "#1f3700",
+            "surface-container": "#1b2027",
+            "on-tertiary-container": "#860011",
+            "on-error": "#690005",
+            "surface": "#0f141b",
+            "surface-container-highest": "#30353d",
+            "on-surface-variant": "#bccbb9",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed": "#410004",
+            "on-surface": "#dee2ec",
+            "secondary": "#94de2d",
+            "tertiary-fixed": "#ffdad7",
+            "secondary-fixed-dim": "#91db2a",
+            "on-error-container": "#ffdad6",
+            "outline-variant": "#3d4a3d",
+            "surface-dim": "#0f141b",
+            "primary-fixed": "#6bff8f",
+            "surface-container-high": "#252a32",
+            "surface-container-low": "#171c23",
+            "error-container": "#93000a",
+            "tertiary-container": "#ff8a83",
+            "secondary-container": "#7ac100",
+            "surface-container-lowest": "#090f15",
             "primary": "#4be277",
             "on-primary": "#003915",
-            "surface": "#0f141b",
-            "on-surface": "#dee2ec",
-            "surface-container": "#1b2027",
-            "surface-container-high": "#252a32",
-            "surface-container-lowest": "#090f15",
-            "on-surface-variant": "#bccbb9",
-            "secondary": "#94de2d",
-            "on-secondary": "#1f3700",
-            "error": "#ffb4ab",
+            "on-tertiary": "#68000a",
+            "on-secondary-fixed-variant": "#304f00",
+            "on-secondary-container": "#2c4900",
+            "on-secondary-fixed": "#102000",
+            "tertiary-fixed-dim": "#ffb3ad",
+            "on-primary-container": "#004b1e",
+            "secondary-fixed": "#acf847",
+            "surface-tint": "#4ae176",
+            "primary-fixed-dim": "#4ae176",
+            "inverse-surface": "#dee2ec",
+            "inverse-primary": "#006e2f",
+            "primary-container": "#22c55e",
+            "outline": "#869585",
+            "inverse-on-surface": "#2c3138"
+          },
+          borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+          spacing: {
+            "space-2xl": "2rem", "gutter-desktop": "1.5rem", "space-base": "1rem", "space-md": "0.75rem",
+            "space-sm": "0.5rem", "space-xl": "1.5rem", "margin-desktop": "2rem", "gutter-mobile": "1rem",
+            "space-3xl": "3rem", "margin-mobile": "1rem", "space-2xs": "0.125rem", "space-lg": "1.25rem", "space-xs": "0.25rem"
           },
           fontFamily: {
-            "label-md": ["Space Grotesk"],
-            "label-sm": ["Space Grotesk"],
-            "headline-md": ["Anybody"],
-            "body-md": ["Hanken Grotesk"],
-            "stat-mono": ["Space Grotesk"],
+            "body-sm": ["Hanken Grotesk"], "body-md": ["Hanken Grotesk"], "headline-xl-mobile": ["Anybody"],
+            "headline-xl": ["Anybody"], "label-sm": ["Space Grotesk"], "headline-lg": ["Anybody"],
+            "stat-mono": ["Space Grotesk"], "score-display": ["Anybody"], "headline-lg-mobile": ["Anybody"],
+            "body-lg": ["Hanken Grotesk"], "score-display-mobile": ["Anybody"], "label-lg": ["Space Grotesk"],
+            "label-md": ["Space Grotesk"], "headline-md": ["Anybody"]
+          },
+          fontSize: {
+            "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+            "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "headline-xl-mobile": ["36px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "headline-xl": ["48px", { lineHeight: "52px", letterSpacing: "-0.03em", fontWeight: "800" }],
+            "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.06em", fontWeight: "700" }],
+            "headline-lg": ["32px", { lineHeight: "38px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "stat-mono": ["15px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "700" }],
+            "score-display": ["56px", { lineHeight: "56px", letterSpacing: "-0.04em", fontWeight: "900" }],
+            "headline-lg-mobile": ["26px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "score-display-mobile": ["40px", { lineHeight: "42px", letterSpacing: "-0.03em", fontWeight: "900" }],
+            "label-lg": ["14px", { lineHeight: "18px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "600" }],
+            "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "700" }]
           }
         }
       }
     };
   </script>
+
+  <style>
+    body { min-height: max(884px, 100dvh); }
+    @layer base {
+      html, body { width: 100%; margin: 0; padding: 0; background-color: #0f141b; color: #dee2ec; }
+      body { overscroll-behavior-y: none; -webkit-tap-highlight-color: transparent; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
 </head>
+
 <body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen">
 
-  <!-- Header -->
+  <!-- HEADER FIJO GLOBAL -->
   <header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] pt-safe">
-    <div class="h-16 px-4 flex items-center justify-between">
-      <div class="flex items-center gap-2">
+    <div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm">
+      <!-- Logo y Marca -->
+      <div class="flex items-center gap-space-sm min-w-0 flex-shrink-0 cursor-pointer" onclick="switchTab('partidos')">
+        <img alt="PitchPulse Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ8jNdPR17_O7L5PMvv_ZjsCRT6YVlipCkicZMNe2fO9x06Lt5VBqwV9TOkI74Az0LXHmr_egFhh4hn_wHoFMf2Gs6RA2iGRalFya2LezsSAssufRbWVam_bhPgVlj9Mj-Adjbt3SmOCEqHI_q4WGMWIxKdlpFo--qPWZHbWDgRQG1TqFi2CnP4qv29EbGlG1aNISH2AeNg-JKYDhIHAKrowfZ4RAMp1P5irkHJ6a_1wHDliyY5UNTiA">
         <div class="flex flex-col justify-center">
-          <span class="font-headline-md text-xl tracking-tight text-primary leading-none uppercase">ÉLITE 11</span>
-          <span class="font-label-sm text-xs text-on-surface-variant tracking-wider">COMUNIDAD</span>
+          <span class="font-headline-md text-headline-md tracking-tight text-primary leading-none uppercase">PitchPulse</span>
+          <span id="header-subtitle" class="font-label-sm text-label-sm text-on-surface-variant truncate uppercase tracking-wider">Partidos & Predicciones</span>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high shadow-[0_0_12px_rgba(34,197,94,0.25)]">
+      <!-- Insignias Superiores (Puntos, Notificaciones, Avatar de Perfil) -->
+      <div class="flex items-center gap-space-sm flex-shrink-0">
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high shadow-[0_0_12px_rgba(34,197,94,0.25)]">
           <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-          <span id="user-points" class="font-stat-mono text-primary font-bold">2,450</span>
-          <span class="font-label-sm text-xs text-on-surface-variant uppercase font-semibold">pts</span>
+          <span class="font-stat-mono text-stat-mono text-primary font-bold leading-none">2,450</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold leading-none">pts</span>
         </div>
+        <button aria-label="Notificaciones" class="relative w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors rounded-xl bg-surface-container-low">
+          <span class="material-symbols-outlined text-[24px]">notifications</span>
+          <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-tertiary-container ring-2 ring-surface"></span>
+        </button>
+        <button onclick="switchTab('perfil')" class="flex items-center justify-center focus:outline-none">
+          <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40 shadow-[0_0_8px_rgba(74,225,118,0.3)] hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUteyB_57kSM9NkHVzPG3UicTO9U0zspiEUnfQkC_Hmman9IxNDbj4tONRqY_cdaf3AcfluW1WRaRR1BVIVbIlsGYw6-WMCd7wcSlowIsN4HFWmNzJpXKci_RZ4G3D_EXBvN8TBKju4wVkMsP0QryJEDkSR54MYFXCUZuMYPkEF60oxlzh4BX81HCK5YP9XiAZOPjarpe870FY4lwEuNliqoJnCK21Q5nz34wYwx8A0zX-6PPZhAzWLQ">
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Contenedor Principal de Pantallas -->
+  <!-- CONTENEDOR PRINCIPAL DE PANTALLAS (SPA VISTAS) -->
   <main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen">
 
-    <!-- PANTALLA 1: INICIO (FEED) -->
-    <div id="tab-inicio" class="tab-content active flex-col w-full px-4 gap-4 pt-2">
-      <article class="bg-surface-container rounded-xl p-4 shadow-md">
-        <div class="flex flex-col">
-          <div class="flex justify-between mb-1">
-            <span class="font-semibold">Tu Tribuna</span>
-            <span class="text-primary text-xs font-bold">+15 pts XP</span>
-          </div>
-          <textarea id="opinion-input" class="w-full bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant rounded-lg p-2.5 text-sm focus:outline-none resize-none" placeholder="¿Qué opinas del partido o jugada polémica?" rows="2"></textarea>
-          <div class="flex justify-end mt-2">
-            <button id="post-btn" class="px-4 py-1.5 rounded-xl bg-primary text-on-primary font-bold text-sm shadow">Opinar</button>
-          </div>
-        </div>
-      </article>
-
-      <div id="posts-container" class="flex flex-col gap-4">
-        <article class="bg-surface-container rounded-xl p-4 shadow-md flex flex-col gap-3">
-          <div class="flex justify-between">
-            <div>
-              <span class="font-bold text-sm">Diego Fanático ⚪</span>
-              <p class="text-xs text-on-surface-variant">@diego_merengue • Hace 12m</p>
-            </div>
-          </div>
-          <p class="text-sm">Sinceramente, lo de Jude Bellingham jugando de falso nueve hoy me parece una genialidad táctica. ¿Coinciden? 👇⚽</p>
-          <div class="bg-surface-container-lowest rounded-xl p-3 flex flex-col gap-2">
-            <span class="text-primary text-xs font-bold">Encuesta de Tribuna</span>
-            <div class="bg-surface-container-high p-2.5 rounded-lg flex justify-between text-sm font-bold text-primary">
-              <span>🔥 Bellingham libre</span>
-              <span>71%</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <!-- PANTALLA 2: PARTIDOS -->
-    <div id="tab-partidos" class="tab-content flex-col w-full px-4 gap-4 pt-2">
-      <h2 class="font-headline-md text-lg text-primary uppercase">Partidos en Vivo</h2>
-      <div class="bg-surface-container rounded-xl p-4 flex flex-col gap-3">
-        <div class="flex justify-between items-center text-sm text-on-surface-variant">
-          <span>La Liga • Jornada 28</span>
-          <span class="text-error font-bold animate-pulse">EN VIVO 78'</span>
-        </div>
-        <div class="flex justify-between items-center font-bold text-base">
-          <span>Real Madrid</span>
-          <span class="text-primary text-xl font-stat-mono">2 - 1</span>
-          <span>Barcelona</span>
+    <!-- ==================== VISTA 1: PARTIDOS & PRONÓSTICOS ==================== -->
+    <div id="view-partidos" class="view-section flex flex-col w-full">
+      <!-- Barra Horizontal de Filtros de Ligas -->
+      <div class="w-full overflow-x-auto no-scrollbar py-space-sm px-margin-mobile">
+        <div class="flex items-center gap-space-xs min-w-max">
+          <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-sm uppercase transition-all shadow-[0_0_12px_rgba(75,226,119,0.35)]">
+            <span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span>Mis Equipos (3)</span>
+          </button>
+          <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-sm uppercase transition-colors">
+            <span class="material-symbols-outlined text-[15px]">military_tech</span>
+            <span>Champions League</span>
+          </button>
+          <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-sm uppercase transition-colors">
+            <span class="material-symbols-outlined text-[15px]">shield</span>
+            <span>La Liga</span>
+          </button>
+          <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface hover:bg-surface-bright font-label-sm uppercase transition-colors">
+            <span class="material-symbols-outlined text-[15px]">sports_soccer</span>
+            <span>Premier League</span>
+          </button>
         </div>
       </div>
-    </div>
 
-    <!-- PANTALLA 3: TRIBUNA / DEBATES -->
-    <div id="tab-tribuna" class="tab-content flex-col w-full px-4 gap-4 pt-2">
-      <h2 class="font-headline-md text-lg text-primary uppercase">Debates Calientes 🔥</h2>
-      <div class="bg-surface-container rounded-xl p-4">
-        <p class="text-sm">Discusión abierta sobre el uso del VAR en competiciones internacionales. ¡Deja tu postura y gana puntos!</p>
-      </div>
-    </div>
-
-    <!-- PANTALLA 4: PERFIL -->
-    <div id="tab-perfil" class="tab-content flex-col w-full px-4 gap-4 pt-2 items-center text-center">
-      <div class="w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-2xl font-bold text-primary mb-2">
-        E11
-      </div>
-      <h2 class="font-headline-md text-lg text-white">Tu Perfil de Hincha</h2>
-      <p class="text-xs text-on-surface-variant">Nivel 18 • Hincha Fiel</p>
-      <div class="w-full bg-surface-container rounded-xl p-4 mt-4 text-left flex flex-col gap-2">
-        <div class="flex justify-between text-sm">
-          <span>Puntos XP totales:</span>
-          <span id="profile-points" class="font-bold text-primary">2,450 pts</span>
-        </div>
-        <div class="flex justify-between text-sm">
-          <span>Predicciones acertadas:</span>
-          <span class="font-bold">14 / 19</span>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Barra de Navegación Inferior Interactiva -->
-  <nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container-high/50 shadow-[0_-8px_24px_rgba(0,0,0,0.7)]">
-    <div class="h-16 px-4 flex items-center justify-around">
-      <button onclick="switchTab('inicio')" id="btn-inicio" class="nav-btn flex flex-col items-center justify-center gap-1 text-primary transition-colors">
-        <span class="material-symbols-outlined text-[24px]">home</span>
-        <span class="font-label-sm text-[10px] tracking-wide font-bold">Inicio</span>
-      </button>
-      <button onclick="switchTab('partidos')" id="btn-partidos" class="nav-btn flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors">
-        <span class="material-symbols-outlined text-[24px]">sports_soccer</span>
-        <span class="font-label-sm text-[10px] tracking-wide">Partidos</span>
-      </button>
-      <button onclick="switchTab('tribuna')" id="btn-tribuna" class="nav-btn flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors">
-        <span class="material-symbols-outlined text-[24px]">forum</span>
-        <span class="font-label-sm text-[10px] tracking-wide">Tribuna</span>
-      </button>
-      <button onclick="switchTab('perfil')" id="btn-perfil" class="nav-btn flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface transition-colors">
-        <span class="material-symbols-outlined text-[24px]">person</span>
-        <span class="font-label-sm text-[10px] tracking-wide">Perfil</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Script de Navegación y Publicación -->
-  <script>
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(el => {
-        el.classList.remove('text-primary');
-        el.classList.add('text-on-surface-variant');
-      });
-
-      document.getElementById('tab-' + tabName).classList.add('active');
-      const activeBtn = document.getElementById('btn-' + tabName);
-      activeBtn.classList.remove('text-on-surface-variant');
-      activeBtn.classList.add('text-primary');
-    }
-
-    const opinionInput = document.getElementById('opinion-input');
-    const postBtn = document.getElementById('post-btn');
-    const postsContainer = document.getElementById('posts-container');
-    const pointsDisplay = document.getElementById('user-points');
-    const profilePoints = document.getElementById('profile-points');
-    let points = 2450;
-
-    if (postBtn && opinionInput && postsContainer) {
-      postBtn.addEventListener('click', () => {
-        const text = opinionInput.value.trim();
-        if (text) {
-          const newArticle = document.createElement('article');
-          newArticle.className = 'bg-surface-container rounded-xl p-4 shadow-md flex flex-col gap-3 border border-primary/30';
-          newArticle.innerHTML = `
-            <div class="flex justify-between">
-              <div>
-                <span class="font-bold text-sm text-primary">Tú (Creador)</span>
-                <p class="text-xs text-on-surface-variant">Ahora mismo</p>
+      <div class="flex flex-col gap-space-lg px-margin-mobile pb-space-2xl">
+        <!-- Tarjeta de Racha Imparable -->
+        <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high p-space-md shadow-md">
+          <div class="flex items-center justify-between gap-space-sm relative z-10">
+            <div class="flex items-center gap-space-md">
+              <div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary flex-shrink-0">
+                <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-label-sm text-label-sm uppercase text-secondary font-bold tracking-wide">Racha Imparable</span>
+                  <span class="inline-flex items-center px-1.5 py-0.2 rounded-full bg-primary/20 text-primary font-stat-mono text-[11px]">+50 pts</span>
+                </div>
+                <span class="font-body-md text-body-md text-on-surface font-semibold">3 aciertos consecutivos esta semana</span>
               </div>
             </div>
-            <p class="text-sm">${text}</p>
-          `;
-          postsContainer.prepend(newArticle);
-          points += 15;
-          pointsDisplay.textContent = points.toLocaleString();
-          if(profilePoints) profilePoints.textContent = points.toLocaleString() + ' pts';
-          opinionInput.value = '';
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Partido Destacado con Marcador y Pronóstico -->
+        <div class="relative rounded-xl bg-surface-container-high p-space-md overflow-hidden shadow-xl">
+          <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+          <div class="flex items-center justify-between pb-space-sm">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-full bg-surface-container-lowest text-primary font-label-sm uppercase tracking-wider">El Clásico</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Santiago Bernabéu</span>
+            </div>
+            <div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-secondary font-stat-mono text-label-sm">
+              <span class="material-symbols-outlined text-[14px]">schedule</span>
+              <span>Hoy 21:00 CEST</span>
+            </div>
+          </div>
+
+          <!-- Equipos -->
+          <div class="grid grid-cols-7 items-center my-space-md">
+            <div class="col-span-3 flex flex-col items-center text-center gap-1.5">
+              <div class="w-14 h-14 rounded-full bg-surface-container-lowest flex items-center justify-center p-2 shadow-inner">
+                <img class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYnZ3kMKljRNIGWDguJVEP1_i5byU_5-VlfEfJEKzkzEp-MAoZwuoEjZDZWiduefBz3VLqMqTvcYPozwd_CZ8aOKUTOOFwXtq4a02zc4PInJ5yEjN9j_0evnlHsnHlmAstNrRiBum6iXmyMrLNDFhJVx-OumGnP3f3wWymH8ja7CQ9wRe8pzYpUstwxKgtsBbZ3ZWJd6HURItqkr65tyBYydrx_DjJ-f1CYqHgXAqPu6VIu221heHYWA" alt="Real Madrid">
+              </div>
+              <span class="font-headline-md text-headline-md text-on-surface leading-tight">Real Madrid</span>
+            </div>
+            <div class="col-span-1 flex flex-col items-center justify-center">
+              <span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface-variant/40 leading-none">VS</span>
+              <span class="mt-2 px-2 py-0.5 rounded bg-primary/10 text-primary font-stat-mono text-[11px] font-bold">+350 PTS</span>
+            </div>
+            <div class="col-span-3 flex flex-col items-center text-center gap-1.5">
+              <div class="w-14 h-14 rounded-full bg-surface-container-lowest flex items-center justify-center p-2 shadow-inner">
+                <img class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpUuZnTkWePtAS7yvOcbnt4pErVWQv8pCDtfGXk4gRl9nlZmUAuv3m4nNnRI5b4ivCH744hZV1PRvyc8oP5R7dt2PFCenWjuc5a0Ejv9u2QWsYAz-s4G5VXf7SthodgYVQ1Mmrkma0fGzcehmONJhQ66rxB4aPf6RZxCwpjR_IUdXJHPe40hhfoDRnQEGEpxJ-YF-0INUA87fCoQF7IvEbJ9FEgxFxb_junvzanSCFj7QmeEk96l9iCw" alt="Barcelona">
+              </div>
+              <span class="font-headline-md text-headline-md text-on-surface leading-tight">Barcelona</span>
+            </div>
+          </div>
+
+          <!-- Módulo de Predicción Interactiva -->
+          <div class="mt-space-sm pt-space-md bg-surface-container-low rounded-xl p-space-md">
+            <div class="flex items-center justify-between mb-space-sm">
+              <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-primary text-[18px]">sports_score</span>
+                <span class="font-label-md text-label-md uppercase text-on-surface font-bold tracking-wide">Pronóstico de Marcador</span>
+              </div>
+              <span class="font-label-sm text-label-sm text-on-surface-variant">Tu predicción</span>
+            </div>
+            <div class="grid grid-cols-2 gap-space-md my-space-sm">
+              <div class="flex items-center justify-between bg-surface-container-high rounded-lg p-space-xs px-space-sm">
+                <button onclick="adjustScore('rm', -1)" class="w-8 h-8 rounded-lg bg-surface-bright text-on-surface flex items-center justify-center font-stat-mono text-lg">-</button>
+                <span id="rm-score" class="font-score-display-mobile text-score-display-mobile text-primary">2</span>
+                <button onclick="adjustScore('rm', 1)" class="w-8 h-8 rounded-lg bg-surface-bright text-on-surface flex items-center justify-center font-stat-mono text-lg">+</button>
+              </div>
+              <div class="flex items-center justify-between bg-surface-container-high rounded-lg p-space-xs px-space-sm">
+                <button onclick="adjustScore('barca', -1)" class="w-8 h-8 rounded-lg bg-surface-bright text-on-surface flex items-center justify-center font-stat-mono text-lg">-</button>
+                <span id="barca-score" class="font-score-display-mobile text-score-display-mobile text-on-surface">1</span>
+                <button onclick="adjustScore('barca', 1)" class="w-8 h-8 rounded-lg bg-surface-bright text-on-surface flex items-center justify-center font-stat-mono text-lg">+</button>
+              </div>
+            </div>
+            <button onclick="confirmPrediction()" class="mt-space-md w-full py-3 px-space-md rounded-lg bg-primary text-on-primary font-label-lg text-label-lg uppercase tracking-wide flex items-center justify-center gap-2 shadow-[0_0_16px_rgba(75,226,119,0.3)] active:scale-[0.98] transition-all">
+              <span class="material-symbols-outlined text-[20px]">bolt</span>
+              <span>Confirmar Pronóstico (+150 pts bonus)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Partidos en Directo Acceso Directo -->
+        <div class="flex flex-col gap-space-sm">
+          <div class="flex items-center justify-between">
+            <span class="font-headline-md text-headline-md text-on-surface">En Vivo Ahora</span>
+            <button onclick="switchTab('en-vivo')" class="font-label-sm text-label-sm uppercase text-primary font-bold hover:underline">Ver Tribuna</button>
+          </div>
+          <div onclick="switchTab('en-vivo')" class="cursor-pointer flex flex-col rounded-xl bg-surface-container p-space-md shadow-md gap-space-sm hover:ring-1 hover:ring-primary transition-all">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded-full bg-primary/20 text-primary font-stat-mono text-label-sm font-bold animate-pulse">73' • 2T</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant">Etihad Stadium • 2,450 debatiendo</span>
+            </div>
+            <div class="flex items-center justify-between py-space-xs">
+              <span class="font-headline-md text-on-surface">Man. City</span>
+              <span class="font-score-display-mobile text-on-surface font-black">1 - 1</span>
+              <span class="font-headline-md text-on-surface">Liverpool</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VISTA 2: EN VIVO & DEBATE (TRIBUNA & VAR) ==================== -->
+    <div id="view-en-vivo" class="view-section hidden flex-col w-full">
+      <!-- Live Match Score Header Card -->
+      <section class="px-margin-mobile pt-space-sm pb-space-sm">
+        <div class="bg-surface-container rounded-xl p-space-md shadow-xl relative overflow-hidden ring-1 ring-primary/20">
+          <div class="absolute -top-12 -right-12 w-36 h-36 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="flex items-center justify-between gap-2 mb-space-sm">
+            <div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-error-container/30 ring-1 ring-error text-error shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+              <span class="font-label-sm text-label-sm uppercase font-bold tracking-wider">73:24 • EN DIRECTO</span>
+            </div>
+            <div class="flex items-center gap-1 text-primary">
+              <span class="material-symbols-outlined text-[16px]">sports_score</span>
+              <span class="font-label-sm text-label-sm uppercase tracking-wide font-bold">Premier League • J28</span>
+            </div>
+          </div>
+          <!-- Teams Scoreboard (Man City 1 - 1 Liverpool) -->
+          <div class="grid grid-cols-7 items-center gap-1 py-space-xs">
+            <div class="col-span-3 flex flex-col items-center text-center gap-1.5 min-w-0">
+              <div class="w-12 h-12 rounded-full bg-surface-container-highest p-1.5 flex items-center justify-center shadow-md ring-2 ring-primary/40">
+                <img class="w-full h-full object-contain rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp4-cZ8c0T63OF4jMfXZ6AXTXJBP9PkEk3l_tc5AcThQCDi-M9Tgl2X_JvTMz2jDBG4q8dqHMrtcrhU-CLiMnrFEKYGbvc8SswR8pwUpMQIPTmliR6UtR14Wrdaxa-vZ-SIhYimGvk0clvt88E4MRdRy1NkNgMxSC-vJFWKTjJizm31blEh995ewGP9KHlvx1-6fvSo2h9iOb2qGfrDroCRjGDgshfEWtE8r_pQr2KVNpqj3k-PmOdDQ" alt="Man City">
+              </div>
+              <span class="font-headline-md text-headline-md text-on-surface truncate w-full">Man City</span>
+              <span class="font-label-sm text-label-sm text-primary font-semibold">Haaland 28' (P)</span>
+            </div>
+            <div class="col-span-1 flex flex-col items-center justify-center">
+              <div class="flex items-center justify-center gap-1 font-score-display-mobile text-score-display-mobile text-on-surface tracking-tighter">
+                <span class="text-primary">1</span>
+                <span class="text-on-surface-variant text-[24px] leading-none mb-1">:</span>
+                <span>1</span>
+              </div>
+              <span class="font-label-sm text-label-sm bg-surface-container-high px-2 py-0.5 rounded text-primary uppercase tracking-widest font-bold text-[10px]">VIVO</span>
+            </div>
+            <div class="col-span-3 flex flex-col items-center text-center gap-1.5 min-w-0">
+              <div class="w-12 h-12 rounded-full bg-surface-container-highest p-1.5 flex items-center justify-center shadow-md">
+                <img class="w-full h-full object-contain rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChee98QQDiU0h6cQs4UhW3TcJCrHOr1QhH26b38bZJr1oHWow850sS_qYUxIQDSNFtNTUKjOLXbRcN9TwQQBTa8JwUWRn_iueHdMf1w5crdvFm7oy9NRjAaypNYHFlanxE3iY6N3v8Px29us0apDlgtv9wKaUrvSuZ70KlF5y901ORL1nt-rra7DP14qwVFBMBcLjpE2RPv_zTxkveqJMJzwR2wAiUhIJ5pd0u6oPpCltTxuM9t1ZLLg" alt="Liverpool">
+              </div>
+              <span class="font-headline-md text-headline-md text-on-surface truncate w-full">Liverpool</span>
+              <span class="font-label-sm text-label-sm text-secondary font-semibold">Salah 61'</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Módulo VAR de la Tribuna (Polémica Activa) -->
+      <section class="px-margin-mobile pt-space-xs pb-space-sm">
+        <div class="bg-surface-container-high rounded-xl p-space-md shadow-2xl relative overflow-hidden">
+          <div class="flex items-center justify-between gap-2 mb-space-sm">
+            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container text-on-error-container shadow-sm">
+              <span class="material-symbols-outlined text-[16px] animate-pulse">local_fire_department</span>
+              <span class="font-label-sm text-label-sm uppercase font-bold tracking-wider">VAR de la Tribuna • Min 71'</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-primary uppercase font-bold">+30 Pts Credibilidad</span>
+          </div>
+          <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight leading-snug mb-space-sm">
+            ¿Fue penal la mano de Van Dijk tras el disparo de Phil Foden?
+          </h2>
+          <!-- Split Vote Bar -->
+          <div class="flex flex-col gap-1.5 mb-space-md">
+            <div class="flex items-center justify-between font-stat-mono text-stat-mono font-bold">
+              <span class="text-primary">SÍ PENAL 74%</span>
+              <span class="text-tertiary">JUEGUE 26%</span>
+            </div>
+            <div class="w-full h-3 bg-surface-container-lowest rounded-full overflow-hidden flex shadow-inner">
+              <div class="bg-primary h-full transition-all duration-500" id="var-penal-bar" style="width: 74%"></div>
+              <div class="bg-error-container h-full transition-all duration-500" id="var-juegue-bar" style="width: 26%"></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-space-sm">
+            <button onclick="castVarVote('penal')" id="btn-vote-penal" class="h-12 bg-primary text-on-primary rounded-xl font-label-lg font-bold flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[20px]">check_circle</span>
+              <span>¡SÍ FUE PENAL!</span>
+            </button>
+            <button onclick="castVarVote('juegue')" id="btn-vote-juegue" class="h-12 bg-surface-container-highest text-on-surface hover:text-error rounded-xl font-label-lg font-bold flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all">
+              <span class="material-symbols-outlined text-[20px]">cancel</span>
+              <span>JUEGUE, NADA</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chat en Vivo de la Tribuna -->
+      <section class="px-margin-mobile pt-space-xs pb-space-lg flex flex-col gap-space-sm">
+        <div class="bg-surface-container rounded-xl p-space-md shadow-md">
+          <div class="flex items-start gap-space-sm">
+            <img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC78q3SIcfcS_pkkpJebYy3nZXcnubeTaTRqkoVRV13RX7HcGWPI3lkNDthEQEyguIqWbTYVt6yM83ZN4RRQvevLCcTQHOhJaLNGr76MpPakFhozeu4J1qaxiLzQfSPONVFrW-xs7H8NvWXp8EFIwdobibmBskUu70WuukUbhl8y0XiuwIrlKRx_DyruXrosneLRo9Phd7jfqmxYnnShTefgV7v3rHjPIdcLpG64jQR8NFwq9grjznf3g" alt="Mateo Citizens">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-1 mb-0.5">
+                <span class="font-label-lg text-on-surface font-bold">Mateo_Citizens</span>
+                <span class="font-body-sm text-on-surface-variant">Min 73'</span>
+              </div>
+              <p class="font-body-md text-on-surface">¡ES UN ROBO A MANO ARMADA! Se nota clarísimo en la repetición frontal. ¡Cobren penal ya! 🤬</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== VISTA 3: TÁCTICAS & STATS (PIZARRA 4-3-3) ==================== -->
+    <div id="view-tacticas" class="view-section hidden flex-col w-full px-gutter-mobile py-space-md gap-space-md">
+      <div class="flex items-center justify-between">
+        <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Pizarra Táctica 4-3-3</h2>
+        <span class="px-3 py-1 rounded-full bg-primary/20 text-primary font-stat-mono text-sm font-bold">Man. City XI</span>
+      </div>
+      <div class="relative w-full h-[450px] rounded-2xl bg-gradient-to-b from-surface-container-high to-surface-container-low border border-primary/30 p-4 flex flex-col justify-between overflow-hidden shadow-2xl">
+        <!-- Líneas de la cancha (Cancha cenital estilizada) -->
+        <div class="absolute inset-0 border-2 border-primary/20 rounded-2xl pointer-events-none"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-px bg-primary/20 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full border border-primary/20 pointer-events-none"></div>
+
+        <!-- Delanteros -->
+        <div class="flex justify-around items-center z-10">
+          <div class="flex flex-col items-center bg-surface/80 p-2 rounded-xl backdrop-blur border border-primary/40 shadow">
+            <span class="font-bold text-primary">Foden (47)</span>
+            <span class="text-[10px] text-on-surface-variant">Extremo Izq</span>
+          </div>
+          <div class="flex flex-col items-center bg-surface/80 p-2 rounded-xl backdrop-blur border border-primary/40 shadow">
+            <span class="font-bold text-primary">Haaland (9)</span>
+            <span class="text-[10px] text-on-surface-variant">Delantero Centro</span>
+          </div>
+          <div class="flex flex-col items-center bg-surface/80 p-2 rounded-xl backdrop-blur border border-primary/40 shadow">
+            <span class="font-bold text-primary">Savinho (26)</span>
+            <span class="text-[10px] text-on-surface-variant">Extremo Der</span>
+          </div>
+        </div>
+
+        <!-- Mediocampistas -->
+        <div class="flex justify-around items-center z-10">
+          <div class="flex flex-col items-center bg-surface/80 p-2 rounded-xl backdrop-blur border border-primary/40 shadow">
+            <span class="font-bold text-secondary">De Bruyne (17)</span>
+            <span class="text-[10px] text-on-surface-variant">Mediocentro</span>
+          </div>
+          <div class="flex flex-col items-center bg-surface/80 p-2 rounded-xl backdrop-blur border border-primary/40 shadow">
+            <span class="font-bold text-secondary">Rodri (16)</span>
+            <span class="text-[10px] text-on-surface-variant">Pivote</span>
+          </div>
+          <div class="flex flex-col items-center bg-surface/80 p-2 rounded-xl backdrop-blur border border-primary/40 shadow">
+            <span class="font-bold text-secondary">Bernardo (20)</span>
+            <span class="text-[10px] text-on-surface-variant">Interior</span>
+          </div>
+        </div>
+
+        <!-- Defensas -->
+        <div class="flex justify-around items-center z-10">
+          <div class="flex flex-col items-center bg-surface/80 p-1.5 rounded-xl backdrop-blur border border-outline/30 shadow text-xs"><span>Gvardiol</span></div>
+          <div class="flex flex-col items-center bg-surface/80 p-1.5 rounded-xl backdrop-blur border border-outline/30 shadow text-xs"><span>Dias</span></div>
+          <div class="flex flex-col items-center bg-surface/80 p-1.5 rounded-xl backdrop-blur border border-outline/30 shadow text-xs"><span>Akanji</span></div>
+          <div class="flex flex-col items-center bg-surface/80 p-1.5 rounded-xl backdrop-blur border border-outline/30 shadow text-xs"><span>Walker</span></div>
+        </div>
+
+        <!-- Arquero -->
+        <div class="flex justify-center items-center z-10">
+          <div class="flex flex-col items-center bg-surface/90 px-3 py-1.5 rounded-xl border border-primary shadow">
+            <span class="font-bold text-primary">Ederson (31)</span>
+            <span class="text-[10px] text-on-surface-variant">Arquero</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== VISTA 4: FAN PASS & PREMIOS ==================== -->
+    <div id="view-premios" class="view-section hidden flex-col w-full px-gutter-mobile py-space-md gap-space-md">
+      <div class="flex items-center justify-between">
+        <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">Fan Pass & Premios</h2>
+        <span class="px-3 py-1 rounded-full bg-secondary text-on-secondary font-stat-mono text-sm font-bold">VIP Nivel Pro</span>
+      </div>
+      <!-- Tarjeta Membresía -->
+      <div class="rounded-2xl bg-gradient-to-tr from-surface-container-highest via-surface-bright to-surface-container-high p-space-base shadow-2xl relative overflow-hidden">
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-secondary font-bold tracking-widest uppercase">Membresía Oficial</span>
+          <span class="font-stat-mono text-primary font-black">2,450 PTS</span>
+        </div>
+        <p class="text-on-surface-variant text-sm">Canjea tus puntos acumulados por equipamiento oficial y experiencias VIP.</p>
+      </div>
+      <!-- Catálogo de Canje -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-surface-container p-3 rounded-xl flex flex-col justify-between">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGlNINlQhOiLJDofjk16I7PvDSJmr15qMGUcwoZAYBUrvTVmcZClkPEmuI2ar1cUy2oN6vs689e5mR2zfW1Pzm1Dml8KF3eYnBQOWmbhjE_0WlYVu_lRemC70iH8vP0W1TsywB3tDk-ciPaMd6n_3GOpdtJfGUhYsjWQ-bTNMffZSc-KD9zTLp7TYvG0vXg-cEG0wvhIwvvMyI7UCGVilYGbiFi2yr41fnjA10DRwJ" alt="Camiseta" class="w-full h-28 object-cover rounded-lg mb-2">
+          <h3 class="font-bold text-sm">Camiseta Club 24/25</h3>
+          <span class="text-primary font-stat-mono text-sm font-bold mt-1">5,000 PTS</span>
+        </div>
+        <div class="bg-surface-container p-3 rounded-xl flex flex-col justify-between">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6kqo-dziGHvIO2PM_UaE30Z6ro8mJKZiUS7q4cRdJigR-71a6FklAl5cSXfLloQkB65Sfb-pJwbcoR2ttl_7VqOLXnLcPntDtQChD6tU2YwuUsFq5jNeCVIDfFc1zn6x4_lNEqh9B08VLswAW9Woya1VlJk8RgVlQAv8Kv4GdeLRZVKCAl75O-I1pU-FOmUNrir49UB35mxxI9fU6cu93wP9SYIxeDmQkucbFNF1W" alt="Balón" class="w-full h-28 object-cover rounded-lg mb-2">
+          <h3 class="font-bold text-sm">Balón Oficial Partido</h3>
+          <span class="text-primary font-stat-mono text-sm font-bold mt-1">2,800 PTS</span>
+        </div>
+      </div>
