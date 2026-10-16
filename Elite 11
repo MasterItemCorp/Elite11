@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <title>PitchPulse / ÉLITE 11 - App de Afición, Tácticas & Beta Testers</title>
+  
+  <!-- Tipografía & Iconos Oficiales -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400..900;1,400..900&family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Configuración de Tokens y Colores de la Marca -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed": "#002109",
+            "on-background": "#dee2ec",
+            "tertiary": "#ffb4ae",
+            "background": "#0f141b",
+            "surface-variant": "#30353d",
+            "on-primary-fixed-variant": "#005321",
+            "surface-bright": "#343941",
+            "on-tertiary-fixed-variant": "#930013",
+            "on-secondary": "#1f3700",
+            "surface-container": "#1b2027",
+            "on-tertiary-container": "#860011",
+            "on-error": "#690005",
+            "surface": "#0f141b",
+            "surface-container-highest": "#30353d",
+            "on-surface-variant": "#bccbb9",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed": "#410004",
+            "on-surface": "#dee2ec",
+            "secondary": "#94de2d",
+            "tertiary-fixed": "#ffdad7",
+            "secondary-fixed-dim": "#91db2a",
+            "on-error-container": "#ffdad6",
+            "outline-variant": "#3d4a3d",
+            "surface-dim": "#0f141b",
+            "primary-fixed": "#6bff8f",
+            "surface-container-high": "#252a32",
+            "surface-container-low": "#171c23",
+            "error-container": "#93000a",
+            "tertiary-container": "#ff8a83",
+            "secondary-container": "#7ac100",
+            "surface-container-lowest": "#090f15",
+            "primary": "#4be277",
+            "on-primary": "#003915",
+            "on-tertiary": "#68000a",
+            "on-secondary-fixed-variant": "#304f00",
+            "on-secondary-container": "#2c4900",
+            "on-secondary-fixed": "#102000",
+            "tertiary-fixed-dim": "#ffb3ad",
+            "on-primary-container": "#004b1e",
+            "secondary-fixed": "#acf847",
+            "surface-tint": "#4ae176",
+            "primary-fixed-dim": "#4ae176",
+            "inverse-surface": "#dee2ec",
+            "inverse-primary": "#006e2f",
+            "primary-container": "#22c55e",
+            "outline": "#869585",
+            "inverse-on-surface": "#2c3138"
+          },
+          borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" },
+          spacing: {
+            "space-2xl": "2rem", "gutter-desktop": "1.5rem", "space-base": "1rem", "space-md": "0.75rem",
+            "space-sm": "0.5rem", "space-xl": "1.5rem", "margin-desktop": "2rem", "gutter-mobile": "1rem",
+            "space-3xl": "3rem", "margin-mobile": "1rem", "space-2xs": "0.125rem", "space-lg": "1.25rem", "space-xs": "0.25rem"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body { min-height: max(884px, 100dvh); }
+    @layer base {
+      html, body { width: 100%; margin: 0; padding: 0; background-color: #0f141b; color: #dee2ec; }
+      body { overscroll-behavior-y: none; -webkit-tap-highlight-color: transparent; }
+      .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+      .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen">
+
+  <!-- HEADER FIJO GLOBAL -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] pt-safe">
+    <div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm">
+      <div class="flex items-center gap-space-sm min-w-0 flex-shrink-0 cursor-pointer" onclick="switchTab('partidos')">
+        <span class="font-headline-md text-headline-md tracking-tight text-primary leading-none uppercase">PitchPulse</span>
+        <span id="header-subtitle" class="font-label-sm text-label-sm text-on-surface-variant truncate uppercase tracking-wider">Partidos & Predicciones</span>
+      </div>
+      <div class="flex items-center gap-space-sm flex-shrink-0">
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high shadow-[0_0_12px_rgba(34,197,94,0.25)]">
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span id="global-points" class="font-stat-mono text-stat-mono text-primary font-bold leading-none">3,450</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold leading-none">pts</span>
+        </div>
+        <button onclick="switchTab('feedback')" class="px-3 py-1.5 rounded-lg bg-primary/20 text-primary font-label-sm uppercase font-bold hover:bg-primary/30 transition-colors">
+          Beta Test
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL DE PANTALLAS (SPA VISTAS) -->
+  <main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen">
+
+    <!-- ==================== VISTA 1: PARTIDOS & PRONÓSTICOS ==================== -->
+    <div id="view-partidos" class="view-section flex flex-col w-full px-margin-mobile py-space-md gap-space-lg">
+      <div class="flex flex-col gap-space-xs">
+        <span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Plan Piloto Oficial • Beta V1.0</span>
+        <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">El Clásico en Vivo</h1>
+        <p class="font-body-md text-body-md text-on-surface-variant">Fase de prueba exclusiva con 500 hinchas seleccionados.</p>
+      </div>
+      <div class="rounded-xl bg-surface-container-high p-space-md shadow-lg flex flex-col gap-space-md">
+        <div class="flex justify-between items-center">
+          <span class="font-label-md text-label-md uppercase text-on-surface">Santiago Bernabéu</span>
+          <span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-highest text-secondary uppercase">TestFlight & Android</span>
+        </div>
+        <div class="flex justify-around items-center py-2">
+          <div class="text-center"><span class="font-bold text-lg">R. MADRID</span><p class="text-xs text-on-surface-variant">250 Testers</p></div>
+          <span class="font-black text-primary text-xl">VS</span>
+          <div class="text-center"><span class="font-bold text-lg">FC BARCELONA</span><p class="text-xs text-on-surface-variant">250 Testers</p></div>
+        </div>
+        <button onclick="switchTab('feedback')" class="w-full py-3 rounded-lg bg-primary text-on-primary font-label-lg uppercase font-bold tracking-wide shadow">
+          Ir al Panel de Feedback Post-Partido
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== VISTA 2: EVALUACIÓN POST-PARTIDO (BETA TESTER) ==================== -->
+    <div id="view-feedback" class="view-section hidden flex-col w-full px-gutter-mobile py-space-md gap-space-lg">
+      <div class="flex flex-col gap-space-xs">
+        <div class="inline-flex items-center gap-space-xs self-start px-space-sm py-1 rounded-full bg-secondary-container/20 text-secondary">
+          <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+          <span class="font-label-sm text-label-sm uppercase tracking-wider">Fase 4: Evaluación Post-Partido • Beta Tester</span>
+        </div>
+        <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">
+          ¡Pitido Final! Tu veredicto de tester
+        </h1>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          Real Madrid 2 - 1 FC Barcelona • Gracias por estresar los servidores en vivo.
+        </p>
+      </div>
+
+      <!-- Recompensa Inmediata Card -->
+      <div class="relative overflow-hidden rounded-xl bg-surface-container-high p-space-base shadow-md">
+        <div class="flex items-center justify-between gap-space-base relative z-10">
+          <div class="flex items-center gap-space-md">
+            <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm flex-shrink-0">
+              <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Recompensa Exclusiva</span>
+              <span class="font-headline-md text-headline-md text-on-surface leading-none mt-0.5">+1,000 PTS</span>
+              <span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Acreditación instantánea en tu Fan Pass</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de Encuesta Flash -->
+      <form class="flex flex-col gap-space-xl" onsubmit="event.preventDefault(); submitFeedback();">
+        <div class="flex flex-col gap-space-sm">
+          <label class="font-label-lg text-label-lg text-on-surface">1. Fluidez y Latencia del Chat en Vivo</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" class="option-btn p-3 rounded-lg bg-surface-container-low text-left text-sm" onclick="selectOption(this)">Ultrarrápido (&lt; 1s)</button>
+            <button type="button" class="option-btn p-3 rounded-lg bg-surface-container-low text-left text-sm" onclick="selectOption(this)">Estable y fluido</button>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-space-sm">
+          <label class="font-label-lg text-label-lg text-on-surface">2. Cuenta Regresiva tras el Pitido Final (10s)</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" class="option-btn p-3 rounded-lg bg-surface-container-low text-left text-sm" onclick="selectOption(this)">¡Pura adrenalina!</button>
+            <button type="button" class="option-btn p-3 rounded-lg bg-surface-container-low text-left text-sm" onclick="selectOption(this)">Buen ritmo</button>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-4 rounded-xl bg-primary text-on-primary font-bold uppercase tracking-wider shadow-lg">
+          Enviar Feedback y Reclamar +1,000 PTS
+        </button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- MODAL DE ÉXITO -->
+  <div class="hidden fixed inset-0 z-50 flex items-center justify-center p-gutter-mobile bg-background/80 backdrop-blur-md" id="success-modal">
+    <div class="flex flex-col items-center text-center p-space-xl rounded-xl bg-surface-container-high max-w-sm w-full gap-space-md shadow-2xl">
+      <div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-lg animate-bounce">
+        <span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+      </div>
+      <h3 class="font-headline-md text-headline-md text-on-surface">¡Feedback Recibido!</h3>
+      <div class="px-space-lg py-2 rounded-full bg-secondary-container text-on-secondary-container font-headline-md font-black">+1,000 PTS</div>
+      <p class="text-sm text-on-surface-variant">Nuevo saldo disponible: 3,450 PTS</p>
+      <button onclick="closeSuccessModal()" class="w-full py-3 rounded-lg bg-surface-container-highest text-on-surface font-bold uppercase">Volver al Inicio</button>
+    </div>
+  </div>
+
+  <!-- NAVEGACIÓN INFERIOR -->
+  <nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-2xl">
+    <div class="flex items-center justify-around h-16">
+      <button onclick="switchTab('partidos')" class="flex flex-col items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[24px]">sports_soccer</span>
+        <span class="text-[10px] uppercase font-bold">Partidos</span>
+      </button>
+      <button onclick="switchTab('feedback')" class="flex flex-col items-center justify-center text-on-surface-variant">
+        <span class="material-symbols-outlined text-[24px]">bug_report</span>
+        <span class="text-[10px] uppercase font-bold">Beta Test</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+      document.getElementById('view-' + tabId).classList.remove('hidden');
+      document.getElementById('view-' + tabId).classList.add('flex');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectOption(btn) {
+      const parent = btn.parentElement;
+      parent.querySelectorAll('.option-btn').forEach(el => el.classList.remove('bg-surface-container-highest', 'text-primary'));
+      btn.classList.add('bg-surface-container-highest', 'text-primary');
+    }
+
+    function submitFeedback() {
+      document.getElementById('success-modal').classList.remove('hidden');
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('success-modal').classList.add('hidden');
+      switchTab('partidos');
+    }
+  </script>
+</body>
+</html>
